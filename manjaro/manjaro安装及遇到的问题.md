@@ -167,6 +167,26 @@ yay -S <package-name>
 ```
 
 
+ranger 
+```shell
+
+将文本编辑器改为nvim
+#-------------------------------------------
+# Misc
+#-------------------------------------------
+# Define the "editor" for text files as first action
+#mime ^text,  label editor = ${VISUAL:-$EDITOR} -- "$@"
+mime ^text,  label editor = nvim -- "$@"
+mime ^text,  label pager  = "$PAGER" -- "$@"
+!mime ^text, label editor, ext xml|json|csv|tex|py|pl|rb|js|sh|php|dart|html|org|ts = nvim -- "$@"
+!mime ^text, label pager,  ext xml|json|csv|tex|py|pl|rb|js|sh|php = "$PAGER" -- "$@"
+
+
+
+```
+
+
+
 # 拼音
 https://blog.ruo-chen.wang/2020/05/install-fcitx5.html
 https://www.youtube.com/watch?v=C2mWxeiq9Wo
