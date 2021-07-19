@@ -170,8 +170,8 @@ yay -S <package-name>
 ranger 
 ```shell
 
-将文本编辑器改为nvim
-#-------------------------------------------
+
+#将文本编辑器改为nvim ---- rifle
 # Misc
 #-------------------------------------------
 # Define the "editor" for text files as first action
