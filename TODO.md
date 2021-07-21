@@ -127,3 +127,4 @@ msf 下载
 [ybx complier](https://github.com/IammyselfYBX/ybx_compiler)
 
 
+manjaro ranger 打开word ,pdf ,ppt 文档
