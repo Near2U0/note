@@ -120,7 +120,8 @@ msf 下载
 
 [[Stanford\]CS143 Compilers](https://github.com/IammyselfYBX/Computer_Learn/blob/master)
 
-[[西安交大\]《编译原理》（冯博琴）](https://github.com/IammyselfYBX/Computer_Learn/blob/master)
+[[西安交大\]《编译原理》（冯博琴）](https://github.com/IammyselfYBX/Computer_Learn/blob/master) 
+https://www.bilibili.com/video/BV1wW411174p?p=2
 
 #### 3)实战
 
