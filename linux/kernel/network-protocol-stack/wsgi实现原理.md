@@ -109,6 +109,11 @@ if __name__ == '__main__':
 
 
 
+![](../../..\images\linux\kernel\network\wsgi_3.png)
+
+
+
+
 **WSGI / uwsgi / uWSGI 这三个概念的区分。**
 
 * WSGI，是一种描述web服务器（如nginx，uWSGI等服务器）如何与web应用程序（如用Django、Flask框架写的程序）**通信协议**。
