@@ -132,10 +132,11 @@ https://www.bilibili.com/video/BV1wW411174p?p=2                4
 自己动手写编译器：https://pandolia.net/tinyc/ch9_context_free_grammar.html
 
 
+程序设计语言[https://book.douban.com/subject/2152385/]
+自制编译器 https://book.douban.com/subject/26806041/
 
 
 
-
-manjaro ranger 打开word ,pdf ,ppt 文档
+manjaro ranger 打开word , ,ppt 文档
 
 vpn   的原理
