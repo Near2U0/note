@@ -140,3 +140,6 @@ https://www.bilibili.com/video/BV1wW411174p?p=2                4
 manjaro ranger 打开word , ,ppt 文档
 
 vpn   的原理
+
+
+python-requests 
