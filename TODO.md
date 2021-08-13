@@ -143,4 +143,4 @@ vpn   的原理
 
 
 python-requests 
-python-sqlalqmey
+python-sqlalchemy 
