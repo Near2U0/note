@@ -1,0 +1,1068 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>09-面向对象：实现数据和方法的封装</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <style>
+        html {
+            color: #333;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            text-rendering: optimizelegibility;
+            font-family: Helvetica Neue, PingFang SC, Verdana, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif
+        }
+
+        html.borderbox *,
+        html.borderbox :after,
+        html.borderbox :before {
+            box-sizing: border-box
+        }
+
+        article,
+        aside,
+        blockquote,
+        body,
+        button,
+        code,
+        dd,
+        details,
+        dl,
+        dt,
+        fieldset,
+        figcaption,
+        figure,
+        footer,
+        form,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        header,
+        hr,
+        input,
+        legend,
+        li,
+        menu,
+        nav,
+        ol,
+        p,
+        pre,
+        section,
+        td,
+        textarea,
+        th,
+        ul {
+            margin: 0;
+            padding: 0
+        }
+
+        article,
+        aside,
+        details,
+        figcaption,
+        figure,
+        footer,
+        header,
+        menu,
+        nav,
+        section {
+            display: block
+        }
+
+        audio,
+        canvas,
+        video {
+            display: inline-block
+        }
+
+        body,
+        button,
+        input,
+        select,
+        textarea {
+            font: 300 1em/1.8 PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, Helvetica, sans-serif
+        }
+
+        button::-moz-focus-inner,
+        input::-moz-focus-inner {
+            padding: 0;
+            border: 0
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        fieldset,
+        img {
+            border: 0
+        }
+
+        blockquote {
+            position: relative;
+            color: #999;
+            font-weight: 400;
+            border-left: 1px solid #1abc9c;
+            padding-left: 1em;
+            margin: 1em 3em 1em 2em
+        }
+
+        @media only screen and (max-width: 640px) {
+            blockquote {
+                margin: 1em 0
+            }
+        }
+
+        abbr,
+        acronym {
+            border-bottom: 1px dotted;
+            font-variant: normal
+        }
+
+        abbr {
+            cursor: help
+        }
+
+        del {
+            text-decoration: line-through
+        }
+
+        address,
+        caption,
+        cite,
+        code,
+        dfn,
+        em,
+        th,
+        var {
+            font-style: normal;
+            font-weight: 400
+        }
+
+        ol,
+        ul {
+            list-style: none
+        }
+
+        caption,
+        th {
+            text-align: left
+        }
+
+        q:after,
+        q:before {
+            content: ""
+        }
+
+        sub,
+        sup {
+            font-size: 75%;
+            line-height: 0;
+            position: relative
+        }
+
+        :root sub,
+        :root sup {
+            vertical-align: baseline
+        }
+
+        sup {
+            top: -.5em
+        }
+
+        sub {
+            bottom: -.25em
+        }
+
+        a {
+            color: #1abc9c
+        }
+
+        a:hover {
+            text-decoration: underline
+        }
+
+        .typo a {
+            border-bottom: 1px solid #1abc9c
+        }
+
+        .typo a:hover {
+            border-bottom-color: #555;
+            color: #555
+        }
+
+        .typo a:hover,
+        a,
+        ins {
+            text-decoration: none
+        }
+
+        .typo-u,
+        u {
+            text-decoration: underline
+        }
+
+        mark {
+            background: #fffdd1;
+            border-bottom: 1px solid #ffedce;
+            padding: 2px;
+            margin: 0 5px
+        }
+
+        code,
+        pre,
+        pre tt {
+            font-family: Courier, Courier New, monospace
+        }
+
+        pre {
+            background: hsla(0, 0%, 97%, .7);
+            border: 1px solid #ddd;
+            padding: 1em 1.5em;
+            display: block;
+            -webkit-overflow-scrolling: touch
+        }
+
+        hr {
+            border: none;
+            border-bottom: 1px solid #cfcfcf;
+            margin-bottom: .8em;
+            height: 10px
+        }
+
+        .typo-small,
+        figcaption,
+        small {
+            font-size: .9em;
+            color: #888
+        }
+
+        b,
+        strong {
+            font-weight: 700;
+            color: #000
+        }
+
+        [draggable] {
+            cursor: move
+        }
+
+        .clearfix:after,
+        .clearfix:before {
+            content: "";
+            display: table
+        }
+
+        .clearfix:after {
+            clear: both
+        }
+
+        .clearfix {
+            zoom: 1
+        }
+
+        .textwrap,
+        .textwrap td,
+        .textwrap th {
+            word-wrap: break-word;
+            word-break: break-all
+        }
+
+        .textwrap-table {
+            table-layout: fixed
+        }
+
+        .serif {
+            font-family: Palatino, Optima, Georgia, serif
+        }
+
+        .typo-dl,
+        .typo-form,
+        .typo-hr,
+        .typo-ol,
+        .typo-p,
+        .typo-pre,
+        .typo-table,
+        .typo-ul,
+        .typo dl,
+        .typo form,
+        .typo hr,
+        .typo ol,
+        .typo p,
+        .typo pre,
+        .typo table,
+        .typo ul,
+        blockquote {
+            margin-bottom: 1rem
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: PingFang SC, Helvetica Neue, Verdana, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
+            color: #000;
+            line-height: 1.35
+        }
+
+        .typo-h1,
+        .typo-h2,
+        .typo-h3,
+        .typo-h4,
+        .typo-h5,
+        .typo-h6,
+        .typo h1,
+        .typo h2,
+        .typo h3,
+        .typo h4,
+        .typo h5,
+        .typo h6 {
+            margin-top: 1.2em;
+            margin-bottom: .6em;
+            line-height: 1.35
+        }
+
+        .typo-h1,
+        .typo h1 {
+            font-size: 2em
+        }
+
+        .typo-h2,
+        .typo h2 {
+            font-size: 1.8em
+        }
+
+        .typo-h3,
+        .typo h3 {
+            font-size: 1.6em
+        }
+
+        .typo-h4,
+        .typo h4 {
+            font-size: 1.4em
+        }
+
+        .typo-h5,
+        .typo-h6,
+        .typo h5,
+        .typo h6 {
+            font-size: 1.2em
+        }
+
+        .typo-ul,
+        .typo ul {
+            margin-left: 1.3em;
+            list-style: disc
+        }
+
+        .typo-ol,
+        .typo ol {
+            list-style: decimal;
+            margin-left: 1.9em
+        }
+
+        .typo-ol ol,
+        .typo-ol ul,
+        .typo-ul ol,
+        .typo-ul ul,
+        .typo li ol,
+        .typo li ul {
+            margin-bottom: .8em;
+            margin-left: 2em
+        }
+
+        .typo-ol ul,
+        .typo-ul ul,
+        .typo li ul {
+            list-style: circle
+        }
+
+        .typo-table td,
+        .typo-table th,
+        .typo table caption,
+        .typo table td,
+        .typo table th {
+            border: 1px solid #ddd;
+            padding: .5em 1em;
+            color: #666
+        }
+
+        .typo-table th,
+        .typo table th {
+            background: #fbfbfb
+        }
+
+        .typo-table thead th,
+        .typo table thead th {
+            background: hsla(0, 0%, 95%, .7)
+        }
+
+        .typo table caption {
+            border-bottom: none
+        }
+
+        .typo-input,
+        .typo-textarea {
+            -webkit-appearance: none;
+            border-radius: 0
+        }
+
+        .typo-em,
+        .typo em,
+        caption,
+        legend {
+            color: #000;
+            font-weight: inherit
+        }
+
+        .typo-em {
+            position: relative
+        }
+
+        .typo-em:after {
+            position: absolute;
+            top: .65em;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            content: "\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"
+        }
+
+        .typo img {
+            max-width: 100%
+        }
+
+        .common-content {
+            font-weight: 400;
+            color: #353535;
+            line-height: 1.75rem;
+            white-space: normal;
+            word-break: normal;
+            font-size: 1rem
+        }
+
+        .common-content img {
+            display: block;
+            max-width: 100%;
+            background-color: #eee
+        }
+
+        .common-content audio,
+        .common-content video {
+            width: 100%;
+            background-color: #eee
+        }
+
+        .common-content center,
+        .common-content font {
+            margin-top: 1rem;
+            display: inline-block
+        }
+
+        .common-content center {
+            width: 100%
+        }
+
+        .common-content pre {
+            margin-top: 1rem;
+            padding-left: 0;
+            padding-right: 0;
+            position: relative;
+            overflow: hidden
+        }
+
+        .common-content pre code {
+            font-size: .8rem;
+            font-family: Consolas, Liberation Mono, Menlo, monospace, Courier;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            overflow-x: auto
+        }
+
+        .common-content hr {
+            border: none;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-top: 1px solid #f5f5f5;
+            height: 1px;
+            background: none
+        }
+
+        .common-content b,
+        .common-content h1,
+        .common-content h2,
+        .common-content h3,
+        .common-content h4,
+        .common-content h5,
+        .common-content strong {
+            font-weight: 700
+        }
+
+        .common-content h1,
+        .common-content h2 {
+            font-size: 1.125rem;
+            margin-bottom: .45rem
+        }
+
+        .common-content h3,
+        .common-content h4,
+        .common-content h5 {
+            font-size: 1rem;
+            margin-bottom: .45rem
+        }
+
+        .common-content p {
+            font-weight: 400;
+            color: #353535;
+            margin-top: .15rem
+        }
+
+        .common-content .orange {
+            color: #ff5a05
+        }
+
+        .common-content .reference {
+            font-size: 1rem;
+            color: #888
+        }
+
+        .custom-rich-content h1 {
+            margin-top: 0;
+            font-weight: 400;
+            font-size: 15.25px;
+            border-bottom: 1px solid #eee;
+            line-height: 2.8
+        }
+
+        .custom-rich-content li,
+        .custom-rich-content p {
+            font-size: 14px;
+            color: #888;
+            line-height: 1.6
+        }
+
+        table.hljs-ln {
+            margin-bottom: 0;
+            border-spacing: 0;
+            border-collapse: collapse
+        }
+
+        table.hljs-ln,
+        table.hljs-ln tbody,
+        table.hljs-ln td,
+        table.hljs-ln tr {
+            box-sizing: border-box
+        }
+
+        table.hljs-ln td {
+            padding: 0;
+            border: 0
+        }
+
+        table.hljs-ln td.hljs-ln-numbers {
+            min-width: 15px;
+            color: rgba(27, 31, 35, .3);
+            text-align: right;
+            white-space: nowrap;
+            cursor: pointer;
+            user-select: none
+        }
+
+        table.hljs-ln td.hljs-ln-code,
+        table.hljs-ln td.hljs-ln-numbers {
+            font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace;
+            font-size: 12px;
+            line-height: 20px;
+            vertical-align: top
+        }
+
+        table.hljs-ln td.hljs-ln-code {
+            position: relative;
+            padding-right: 10px;
+            padding-left: 10px;
+            overflow: visible;
+            color: #24292e;
+            word-wrap: normal;
+            white-space: pre
+        }
+
+        video::-webkit-media-controls {
+            overflow: hidden !important
+        }
+
+        video::-webkit-media-controls-enclosure {
+            width: calc(100% + 32px);
+            margin-left: auto
+        }
+
+        ._29HP61GA_0 {
+            max-width:800px;
+            margin:0 auto;
+            margin-bottom: 20px;
+            font-weight: 400;
+            color: #353535;
+            line-height: 1.76;
+            white-space: normal;
+            word-break: normal;
+            font-size: 17px;
+            -webkit-transition: background-color .3s ease;
+            transition: background-color .3s ease
+        }
+
+        ._29HP61GA_0 .MathJax_Display {
+            overflow: auto
+        }
+
+        ._29HP61GA_0 .poster {
+            position: fixed;
+            left: -10000px;
+            top: -10000px;
+            overflow: hidden;
+            padding: 1rem;
+            background: #ececec
+        }
+
+        ._29HP61GA_0 .richcontent-pre-copy {
+            font-size: 13px;
+            color: #888;
+            position: absolute;
+            right: 1em;
+            top: .5em;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none
+        }
+
+        ._29HP61GA_0 .richcontent-pre-copy .iconfont {
+            font-size: 12px;
+            margin-right: .2em
+        }
+
+        ._29HP61GA_0 a {
+            color: #fa8919;
+            border-bottom: 1px solid #fa8919
+        }
+
+        ._29HP61GA_0 img {
+            display: block;
+            max-width: 100%;
+            position: relative;
+            left: 50%;
+            -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+            background-color: #eee;
+            vertical-align: top;
+            border-radius: 0
+        }
+
+        ._29HP61GA_0 audio,
+        ._29HP61GA_0 video {
+            width: 100%;
+            background-color: #eee
+        }
+
+        ._29HP61GA_0 pre {
+            margin-top: 16px;
+            padding: 34px 0 0;
+            margin-bottom: 30px;
+            position: relative;
+            border-radius: 6px;
+            background: rgba(246, 247, 251, .749);
+            border: 0
+        }
+
+        ._29HP61GA_0 pre code {
+            font-size: 12px;
+            font-family: Consolas, Liberation Mono, Menlo, monospace, Courier;
+            display: block;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            margin-left: 16px;
+            margin-right: 16px;
+            overflow-x: scroll
+        }
+
+        ._29HP61GA_0 pre code:after {
+            content: "";
+            height: 30px;
+            width: 100%;
+            display: block
+        }
+
+        ._29HP61GA_0 hr {
+            border: none;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-top: 1px solid #f5f5f5;
+            height: 1px;
+            background: none
+        }
+
+        ._29HP61GA_0 h1,
+        ._29HP61GA_0 h2,
+        ._29HP61GA_0 h3,
+        ._29HP61GA_0 h4,
+        ._29HP61GA_0 h5 {
+            margin-bottom: 20px;
+            margin-top: 0;
+            font-weight: 700
+        }
+
+        ._29HP61GA_0 b,
+        ._29HP61GA_0 strong {
+            font-weight: 700
+        }
+
+        ._29HP61GA_0 h1 {
+            font-size: 21px
+        }
+
+        ._29HP61GA_0 h2 {
+            font-size: 20px
+        }
+
+        ._29HP61GA_0 h3 {
+            font-size: 19px
+        }
+
+        ._29HP61GA_0 h4 {
+            font-size: 18px
+        }
+
+        ._29HP61GA_0 h5 {
+            font-size: 17px
+        }
+
+        ._29HP61GA_0 center,
+        ._29HP61GA_0 p {
+            font-weight: 400;
+            color: #353535;
+            margin-top: 0;
+            margin-bottom: 30px;
+            word-break: break-word
+        }
+
+        ._29HP61GA_0 center {
+            text-align: center
+        }
+
+        ._29HP61GA_0 blockquote {
+            margin-top: 0;
+            margin-bottom: 34px;
+            border-left: 3px solid #e8e8e8;
+            padding-left: 17px;
+            color: #353535
+        }
+
+        ._29HP61GA_0 blockquote p {
+            margin-top: 0;
+            margin-bottom: 0
+        }
+
+        ._29HP61GA_0 ol,
+        ._29HP61GA_0 ul {
+            margin-bottom: 30px
+        }
+
+        ._29HP61GA_0 ol p,
+        ._29HP61GA_0 ul p {
+            margin-top: 0;
+            margin-bottom: 0
+        }
+
+        ._29HP61GA_0 ol {
+            list-style: decimal;
+            margin-left: 20px
+        }
+
+        ._29HP61GA_0 ul li {
+            padding-left: 17px;
+            position: relative;
+            margin-bottom: 10px
+        }
+
+        ._29HP61GA_0 ul li:after {
+            content: "";
+            height: 6px;
+            width: 6px;
+            border-radius: 50%;
+            background: #353535;
+            position: absolute;
+            top: 10px;
+            left: 0
+        }
+
+        ._29HP61GA_0 .orange {
+            color: #fa8919
+        }
+
+        ._29HP61GA_0 .reference {
+            color: #888
+        }
+
+        ._29HP61GA_0 .m-right {
+            text-align: right
+        }
+
+        ._29HP61GA_0 .m-center {
+            text-align: center;
+            display: block
+        }
+
+        ._29HP61GA_0 .m-gray {
+            color: #888
+        }
+
+        ._29HP61GA_0 .m-small {
+            font-size: 15px
+        }
+
+        ._29HP61GA_0 table.hljs-ln {
+            margin-bottom: 0;
+            border-spacing: 0;
+            border-collapse: collapse
+        }
+
+        ._29HP61GA_0 table.hljs-ln,
+        ._29HP61GA_0 table.hljs-ln tbody,
+        ._29HP61GA_0 table.hljs-ln td,
+        ._29HP61GA_0 table.hljs-ln tr {
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box
+        }
+
+        ._29HP61GA_0 table.hljs-ln td {
+            padding: 0;
+            border: 0
+        }
+
+        ._29HP61GA_0 table.hljs-ln td.hljs-ln-numbers {
+            min-width: 15px;
+            font-size: 12px;
+            color: rgba(27, 31, 35, .3);
+            text-align: right;
+            white-space: nowrap;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none
+        }
+
+        ._29HP61GA_0 table.hljs-ln td.hljs-ln-code,
+        ._29HP61GA_0 table.hljs-ln td.hljs-ln-numbers {
+            font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace;
+            line-height: 20px;
+            vertical-align: top
+        }
+
+        ._29HP61GA_0 table.hljs-ln td.hljs-ln-code {
+            position: relative;
+            padding-right: 10px;
+            padding-left: 10px;
+            overflow: visible;
+            font-size: 13px;
+            color: #666;
+            word-wrap: normal;
+            white-space: pre
+        }
+
+    </style>
+</head>
+<body>
+<div class="_29HP61GA_0">
+<h1>09-面向对象：实现数据和方法的封装</h1>
+<p>在现代计算机语言中，面向对象是非常重要的特性，似乎常用的语言都支持面向对象特性，比如Swift、C++、Java……不支持的反倒是异类了。</p><p>而它重要的特点就是封装。也就是说，对象可以把数据和对数据的操作封装在一起，构成一个不可分割的整体，尽可能地隐藏内部的细节，只保留一些接口与外部发生联系。 在对象的外部只能通过这些接口与对象进行交互，无需知道对象内部的细节。这样能降低系统的耦合，实现内部机制的隐藏，不用担心对外界的影响。那么它们是怎样实现的呢？</p><p>本节课，我将从语义设计和运行时机制的角度剖析面向对象的特性，带你深入理解面向对象的实现机制，让你能在日常编程工作中更好地运用面向对象的特性。比如，在学完这讲之后，你会对对象的作用域和生存期、对象初始化过程等有更清晰的了解。而且你不会因为学习了Java或C++的面向对象机制，在学习JavaScript和Ruby的面向对象机制时觉得别扭，因为它们的本质是一样的。</p><p>接下来，我们先简单地聊一下什么是面向对象。</p><h2>面向对象的语义特征</h2><p>我的一个朋友，在10多年前做过培训师，为了吸引学员的注意力，他在讲“什么是面向对象”时说：“面向对象是世界观，是方法论。”</p><p>虽然有点儿语不惊人死不休的意思，但我必须承认，所有的计算机语言都是对世界进行建模的方式，只不过建模的视角不同罢了。面向对象的设计思想，在上世纪90年代被推崇，几乎被视为最好的编程模式。实际上，各种不同的编程思想，都会表现为这门语言的语义特征，所以，我就从语义角度，利用类型、作用域、生存期这样的概念带你深入剖析一下面向对象的封装特性，其他特性在后面的课程中再去讨论。</p><!-- [[[read_end]]] --><ul>
+<li><strong>从类型角度</strong></li>
+</ul><p>类型处理是语义分析时的重要工作。现代计算机语言可以用自定义的类来声明变量，这是一个巨大的进步。因为早期的计算机语言只支持一些基础的数据类型，比如各种长短不一的整型和浮点型，像字符串这种我们编程时离不开的类型，往往是在基础数据类型上封装和抽象出来的。所以，我们要扩展语言的类型机制，让程序员可以创建自己的类型。</p><ul>
+<li><strong>从作用域角度</strong></li>
+</ul><p>首先是类的可见性。作为一种类型，它通常在整个程序的范围内都是可见的，可以用它声明变量。当然，一些像Java的语言，也能限制某些类型的使用范围，比如只能在某个命名空间内，或者在某个类内部。</p><p>对象的成员的作用域是怎样的呢？我们知道，对象的属性（“属性”这里指的是类的成员变量）可以在整个对象内部访问，无论在哪个位置声明。也就是说，对象属性的作用域是整个对象的内部，方法也是一样。这跟函数和块中的本地变量不一样，它们对声明顺序有要求，像C和Java这样的语言，在使用变量之前必须声明它。</p><ul>
+<li><strong>从生存期的角度</strong></li>
+</ul><p>对象的成员变量的生存期，一般跟对象的生存期是一样的。在创建对象的时候，就对所有成员变量做初始化，在销毁对象的时候，所有成员变量也随着一起销毁。当然，如果某个成员引用了从堆中申请的内存，这些内存需要手动释放，或者由垃圾收集机制释放。</p><p>但还有一些成员，不是与对象绑定的，而是与类型绑定的，比如Java中的静态成员。静态成员跟普通成员的区别，就是作用域和生存期不同，它的作用域是类型的所有对象实例，被所有实例共享。生存期是在任何一个对象实例创建之前就存在，在最后一个对象销毁之前不会消失。</p><p>你看，我们用这三个语义概念，就把面向对象的封装特性解释清楚了，无论语言在顶层怎么设计，在底层都是这么实现的。</p><p>了解了面向对象在语义上的原理之后，我们来实际动手解析一下代码中的类，这样能更深刻地体会这些原理。</p><h2>设计类的语法，并解析它</h2><p>我们要在语言中支持类的定义，在PlayScript.g4中，可以这样定义类的语法规则：</p><pre><code>classDeclaration
+    : CLASS IDENTIFIER
+      (EXTENDS typeType)?
+      (IMPLEMENTS typeList)?
+      classBody
+    ;
+
+classBody
+    : '{' classBodyDeclaration* '}'
+    ;
+
+classBodyDeclaration
+    : ';'
+    | memberDeclaration
+    ;
+
+memberDeclaration
+    : functionDeclaration
+    | fieldDeclaration
+    ;
+
+functionDeclaration
+    : typeTypeOrVoid IDENTIFIER formalParameters ('[' ']')*
+      (THROWS qualifiedNameList)?
+      functionBody
+    ;
+</code></pre><p>我来简单地讲一下这个语法规则：</p><ul>
+<li>类声明以class关键字开头，有一个标识符是类型名称，后面跟着类的主体。</li>
+<li>类的主体里要声明类的成员。在简化的情况下，可以只关注类的属性和方法两种成员。我们故意把类的方法也叫做function，而不是method，是想把对象方法和函数做一些统一的设计。</li>
+<li>函数声明现在的角色是类的方法。</li>
+<li>类的成员变量的声明和普通变量声明在语法上没什么区别。</li>
+</ul><p>你能看到，我们构造像class这样高级别的结构时，越来越得心应手了，之前形成的一些基础的语法模块都可以复用，比如变量声明、代码块（block）等。</p><p>用上面的语法写出来的playscript脚本的效果如下，在示例代码里也有，你可以运行它：</p><pre><code>/*
+ClassTest.play 简单的面向对象特性。
+*/
+class Mammal{
+  //类属性
+  string name = &quot;&quot;;
+
+  //构造方法
+  Mammal(string str){
+    name = str;
+  }
+
+  //方法
+  void speak(){
+    println(&quot;mammal &quot; + name +&quot; speaking...&quot;);
+  }
+}
+
+Mammal mammal = Mammal(&quot;dog&quot;); //playscript特别的构造方法，不需要new关键字
+mammal.speak();                          //访问对象方法
+println(&quot;mammal.name = &quot; + mammal.name); //访问对象的属性
+
+//没有构造方法，创建的时候用缺省构造方法
+class Bird{
+  int speed = 50;    //在缺省构造方法里初始化
+
+  void fly(){
+    println(&quot;bird flying...&quot;);
+  }
+}
+
+Bird bird = Bird();              //采用缺省构造方法
+println(&quot;bird.speed : &quot; + bird.speed + &quot;km/h&quot;);
+bird.fly();
+</code></pre><p>接下来，我们让playscript解释器处理这些看上去非常现代化的代码，怎么处理呢？</p><p>做完词法分析和语法分析之后，playscript会在语义分析阶段扫描AST，识别出所有自定义的类型，以便在其他地方引用这些类型来声明变量。因为类型的声明可以在代码中的任何位置，所以最好用单独的一次遍历来识别和记录类型（类型扫描的代码在TypeAndScopeScanner.java里）。</p><p>接着，我们在声明变量时，就可以引用这个类型了。语义分析的另一个工作，就是做变量类型的消解。当我们声明“Bird bird = Bird(); ”时，需要知道Bird对象的定义在哪里，以便正确地访问它的成员（变量类型的消解在TypeResolver.java里）。</p><p>在做语义分析时，要把类型的定义保存在一个数据结构中，我们来实现一下：</p><pre><code>public class Class extends Scope implements Type{
+    ...
+}
+
+public abstract class Scope extends Symbol{
+    // 该Scope中的成员，包括变量、方法、类等。
+    protected List&lt;Symbol&gt; symbols = new LinkedList&lt;Symbol&gt;(
+}
+
+public interface Type {
+    public String getName();    //类型名称
+
+    public Scope getEnclosingScope();
+}
+</code></pre><p>在这个设计中，我们看到Class就是一个Scope，Scope里面原来就能保存各种成员，现在可以直接复用，用来保存类的属性和方法，画成类图如下：</p><p><img src="https://static001.geekbang.org/resource/image/8d/63/8d41eae6ab678ad6128d76854fe27463.jpg" alt=""></p><p>图里有几个类，比如Symbol、Variable、Scope、Function和BlockScope，它们是我们的符号体系的主要成员。在做词法分析时，我们会解析出很多标识符，这些标识符出现在不同的语法规则里，包括变量声明、表达式，以及作为类名、方法名等出现。</p><p>在语义分析阶段，我们要把这些标识符一一识别出来，这个是一个变量，指的是一个本地变量；那个是一个方法名等。</p><p>变量、类和函数的名称，我们都叫做符号，比如示例程序中的Mammal、Bird、mammal、bird、name、speed等。编译过程中的一项重要工作就是建立符号表，它帮助我们进一步地编译或执行程序，而符号表就用上面几个类来保存信息。</p><p>在符号表里，我们保存它的名称、类型、作用域等信息。对于类和函数，我们也有相应的地方来保存类变量、方法、参数、返回值等信息。你可以看一看示例代码里面是如何解析和记录这些符号的。</p><p>解析完这些语义信息以后，我们来看运行期如何执行具有面向对象特征的程序，比如如何实例化一个对象？如何在内存里管理对象的数据？以及如何访问对象的属性和方法？</p><h2>对象是怎么实例化的</h2><p>首先通过构造方法来创建对象。</p><p>在语法中，我们没有用new这个关键字来表示对象的创建，而是省略掉了new，直接调用一个跟类名称相同的函数，这是我们独特的设计，示例代码如下：</p><pre><code>Mammal mammal = Mammal(&quot;dog&quot;); //playscript特别的构造方法，不需要new关键字
+Bird bird = Bird();            //采用缺省构造方法
+</code></pre><p>但在语义检查的时候，在当前作用域中是肯定找不到这样一个函数的，因为类的初始化方法是在类的内部定义的，我们只要检查一下，Mammal和Bird是不是一个类名就可以了。</p><p>再进一步，Mammal类中确实有个构造方法Mammal()，而Bird类中其实没有一个显式定义的构造方法，但这并不意味着变量成员不会被初始化。我们借鉴了Java的初始化机制，就是提供缺省初始化方法，在缺省初始化方法里，会执行对象成员声明时所做的初始化工作。所以，上面的代码里，我们调用Bird()，实际上就是调用了这个缺省的初始化方法。无论有没有显式声明的构造方法，声明对象的成员变量时的初始化部分，一定会执行。对于Bird类，实际上就会执行“int speed = 50;”这个语句。</p><p>在RefResolver.java中做语义分析的时候，下面的代码能够检测出某个函数调用其实是类的构造方法，或者是缺省构造方法：</p><pre><code>// 看看是不是类的构建函数，用相同的名称查找一个class
+Class theClass = at.lookupClass(scope, idName);
+if (theClass != null) {
+    function = theClass.findConstructor(paramTypes);
+    if (function != null) {
+        at.symbolOfNode.put(ctx, function);
+    }
+    //如果是与类名相同的方法，并且没有参数，那么就是缺省构造方法
+    else if (ctx.expressionList() == null){
+        at.symbolOfNode.put(ctx, theClass); // TODO 直接赋予class
+    }
+    else{
+        at.log(&quot;unknown class constructor: &quot; + ctx.getText(), ctx);
+    }
+
+    at.typeOfNode.put(ctx, theClass); // 这次函数调用是返回一个对象
+}
+</code></pre><p>当然，类的构造方法跟普通函数还是有所不同的，例如我们不允许构造方法定义返回值，因为它的返回值一定是这个类的一个实例对象。</p><p>对象做了缺省初始化以后，再去调用显式定义的构造方法，这样才能完善整个对象实例化的过程。不过问题来了，我们可以把普通的本地变量的数据保存在栈里，那么如何保存对象的数据呢？</p><h2>如何在内存里管理对象的数据</h2><p>其实，我们也可以把对象的数据像其他数据一样，保存在栈里。</p><p><img src="https://static001.geekbang.org/resource/image/57/1b/572da99aeee859f8b7cbcf6ebfe9ea1b.jpg" alt=""></p><p>C语言的结构体struct和C++语言的对象，都可以保存在栈里。保存在栈里的对象是直接声明并实例化的，而不是用new关键字来创建的。如果用new关键字来创建，实际上是在堆里申请了一块内存，并赋值给一个指针变量，如下图所示：</p><p><img src="https://static001.geekbang.org/resource/image/15/72/15313f8205fa80912e72718685755072.jpg" alt=""></p><p>当对象保存在堆里的时候，可以有多个变量都引用同一个对象，比如图中的变量a和变量b就可以引用同一个对象object1。类的成员变量也可以引用别的对象，比如object1中的类成员引用了object2对象。对象的生存期可以超越创建它的栈桢的生存期。</p><p>我们可以对比一下这两种方式的优缺点。如果对象保存在栈里，那么它的生存期与作用域是一样的，可以自动的创建和销毁，因此不需要额外的内存管理。缺点是对象没办法长期存在并共享。而在堆里创建的对象虽然可以被共享使用，却增加了内存管理的负担。</p><p>所以在C语言和C++语言中，要小心管理从堆中申请的内存，在合适的时候释放掉这些内存。在Java语言和其他一些语言中，采用的是垃圾收集机制，也就是说当一个对象不再被引用时，就把内存收集回来。</p><p>分析到这儿的时候，我们其实可以帮Java语言优化一下内存管理。比如我们在分析代码时，如果发现某个对象的创建和使用都局限在某个块作用域中，并没有跟其他作用域共享，那么这个对象的生存期与当前栈桢是一致的，可以在栈里申请内存，而不是在堆里。这样可以免除后期的垃圾收集工作。</p><p>分析完对象的内存管理方式之后，回到playscript的实现。在playscrip的Java版本里，我们用一个ClassObject对象来保存对象数据，而ClassObject是PlayObject的子类。上一讲，我们已经讲过PlayObject，它被栈桢用来保存本地变量，可以通过传入Variable来访问对象的属性值：</p><pre><code>//类的实例
+public class ClassObject extends PlayObject{
+     //类型
+    protected Class type = null;
+    ... 
+}
+
+//保存对象数据
+public class PlayObject {
+    //成员变量
+    protected Map&lt;Variable, Object&gt; fields = new HashMap&lt;Variable, Object&gt;();
+
+    public Object getValue(Variable variable){
+        Object rtn = fields.get(variable);
+        return rtn;
+    }
+
+    public void setValue(Variable variable, Object value){
+        fields.put(variable, value);
+    }
+}
+</code></pre><p>在运行期，当需要访问一个对象时，我们也会用ClassObject来做一个栈桢，这样就可以像访问本地变量一样访问对象的属性了。而不需要访问这个对象的时候，就把它从栈中移除，如果没有其他对象引用这个对象，那么它会被Java的垃圾收集机制回收。</p><h2>访问对象的属性和方法</h2><p>在示例代码中，我们用点操作符来访问对象的属性和方法，比如：</p><pre><code>mammal.speak();                          //访问对象方法
+println(&quot;mammal.name = &quot; + mammal.name); //访问对象的属性
+</code></pre><p>属性和方法的引用也是一种表达式，语法定义如下：</p><pre><code>expression
+    : ...
+    | expression bop='.'
+      ( IDENTIFIER       //对象属性
+      | functionCall     //对象方法
+      )
+     ...
+     ;
+</code></pre><p>注意，点符号的操作可以是级联的，比如：</p><pre><code>obj1.obj2.field1;
+obj1.getObject2().field1;
+</code></pre><p>所以，对表达式的求值，要能够获得正确的对象引用，你可以运行一下ClassTest.play脚本，或者去看看我的参考实现。</p><p>另外，对象成员还可以设置可见性。也就是说，有些成员只有对象内部才能用，有些可以由外部访问。这个怎么实现呢？这只是个语义问题，是在编译阶段做语义检查的时候，不允许私有的成员被外部访问，报编译错误就可以了，在其他方面，并没有什么不同。</p><h2>课程小结</h2><p>我们针对面向对象的封装特性，从类型、作用域和生存期的角度进行了重新解读，这样能够更好地把握面向对象的本质特征。我们还设计了与面向对象的相关的语法并做了解析，然后讨论了面向对象程序的运行期机制，例如如何实例化一个对象，如何在内存里管理对象的数据，以及如何访问对象的属性和方法。</p><p>通过对类的语法和语义的剖析和运行机制的落地，我相信你会对面向对象的机制有更加本质的认识，也能更好地使用语言的面向对象特性了。</p><h2>一课一思</h2><p>我们用比较熟悉的语法实现了面向对象的基础特性，像Ruby、Go这样的语言，还有另外的机制来实现面向对象。思考一下，你所熟悉的语言的面向对象机制，在底层是如何实现的？它们在类型、作用域和生存期三个方面的特点是什么？欢迎在留言区分享你的发现。</p><p>最后，感谢你的阅读，如果这篇文章让你有所收获，也欢迎你将它分享给更多的朋友。</p><p>我将本节课相关代码的链接放在了文末，供你参考。</p><ul>
+<li>playscript-java（项目目录）： <a href="https://gitee.com/richard-gong/PlayWithCompiler/tree/master/playscript-java">码云</a>   <a href="https://github.com/RichardGong/PlayWithCompiler/tree/master/playscript-java">GitHub</a></li>
+<li>PlayScript.java（入口程序）：   <a href="https://gitee.com/richard-gong/PlayWithCompiler/blob/master/playscript-java/src/main/play/PlayScript.java">码云</a>   <a href="https://github.com/RichardGong/PlayWithCompiler/blob/master/playscript-java/src/main/play/PlayScript.java">GitHub</a></li>
+<li>PlayScript.g4（语法规则）：     <a href="https://gitee.com/richard-gong/PlayWithCompiler/blob/master/playscript-java/src/main/play/PlayScript.g4">码云</a>   <a href="https://github.com/RichardGong/PlayWithCompiler/blob/master/playscript-java/src/main/play/PlayScript.g4">GitHub</a></li>
+<li>ASTEvaluator.java（解释器）： <a href="https://gitee.com/richard-gong/PlayWithCompiler/blob/master/playscript-java/src/main/play/ASTEvaluator.java">码云</a>   <a href="https://github.com/RichardGong/PlayWithCompiler/blob/master/playscript-java/src/main/play/ASTEvaluator.java">GitHub</a></li>
+<li>TypeAndScopeScanner.java（识别对象声明）： <a href="https://gitee.com/richard-gong/PlayWithCompiler/blob/master/playscript-java/src/main/play/TypeAndScopeScanner.java">码云</a>   <a href="https://github.com/RichardGong/PlayWithCompiler/blob/master/playscript-java/src/main/play/TypeAndScopeScanner.java">GitHub</a></li>
+<li>TypeResolver.java（消解变量声明中引用的类型）： <a href="https://gitee.com/richard-gong/PlayWithCompiler/blob/master/playscript-java/src/main/play/TypeResolver.java">码云</a>   <a href="https://github.com/RichardGong/PlayWithCompiler/blob/master/playscript-java/src/main/play/TypeResolver.java">GitHub</a></li>
+<li>RefResolver.java（消解变量引用和函数调用）： <a href="https://gitee.com/richard-gong/PlayWithCompiler/blob/master/playscript-java/src/main/play/RefResolver.java">码云</a>   <a href="https://github.com/RichardGong/PlayWithCompiler/blob/master/playscript-java/src/main/play/RefResolver.java">GitHub</a></li>
+<li>ClassTest.play（演示面向对象的基本特征）： <a href="https://gitee.com/richard-gong/PlayWithCompiler/blob/master/playscript-java/src/examples/ClassTest.play">码云</a>   <a href="https://github.com/RichardGong/PlayWithCompiler/blob/master/playscript-java/src/examples/ClassTest.play">GitHub</a></li>
+</ul><p><img src="https://static001.geekbang.org/resource/image/00/66/008ff7b6092be5463a414a0e0771dc66.jpg" alt=""></p><h2>精选留言：</h2>
+        <ul>
+        
+<li>
+    <div>
+        <div style="color: #888;font-size:15.25px;font-weight:400;line-height:1.2">
+            d  2019-09-02 19:57:14
+        </div>
+        <div style="color:#353535;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6">
+            c语言也能写成面向对象风格，只要实现了面向对象的范式，就是面向对象模型编程，不知说的对不对，还请宫老师指正。 
+        </div>
+        
+    </div>
+</li>
+            
+<br/>
+
+<li>
+    <div>
+        <div style="color: #888;font-size:15.25px;font-weight:400;line-height:1.2">
+            李梁 | 东大  2019-09-02 00:18:31
+        </div>
+        <div style="color:#353535;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6">
+            请问c++ auto变量能进行对象类型推导，这是怎么实现的呢 
+        </div>
+        <br/>
+<div>
+    <div style="color:#888;font-size:15.25px;font-weight:400;line-height:1.2">作者回复2019-09-02 16:29:30</div>
+    <div style="color:#353535;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6">你很善于动脑。<br><br>类型推断是第11讲里会讲的内容。<br>我这里提前说一下：类型推断就是两个计算过程。一个是S属性（综合属性）计算，从下往上推导，比如：<br>auto a = 2;<br>你从叶子节点2能推导出这整个语句的类型是int。<br>再做I属性（继承属性）计算，就是从上到下的推导。a是这个表达式的叶子节点，a的类型是可以从整个表达式的类型继承下来。</div>
+</div>
+            
+    </div>
+</li>
+            </ul>
+</div>
+</body>
+</html>
