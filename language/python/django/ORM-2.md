@@ -248,13 +248,166 @@ class Book(models.Model):
   ```shell
   # 项目代码发生变化时，重新进入Django shell
   python3 mange.py shell
+  ```
   
   
+
+# ORM查询
+
+```python
+#all 查询全部记录，返回QuerySet查询对象
+##select * from table;
+##返回值：QuerySet容器对象，内部存放的是MyModel实例
+books = Books.objects.all()
+for book in books:
+    printl(book.title, book.pub)
+
+#格式化输出，需要在Book模型下如下的定义：
+def __str__(self):
+    return "%s,%s"%(self.title, self.pub)
+
+#values('列1'，‘列2) 
+#查询部分列的数据，并返回
+select title from tb;
+MyModel.objects.values(列1)
+#返回值，QuerySet，容器为内存字典，每个字典代表一条数据，格式为：{’列1‘：’值1‘， ’列2‘：’值2‘}
+b2 = Book.ojbects.values('tilte','pub')
+for book in a2:
+    print(book['title'])
+
+    
+#values_list('列1'..)
+#select 列1，列2 from tb;
+#返回值：QuerySet容器对象，内部存放的是元组
+#会将查询出来的数据封装到元组中，在封装到查询集合QuerySet中
+#<QuerySet[("python","beijing"), (), ...]>
+a3 = Books.objects.values_list('title')
+for book in a3:
+    print(book[0])
+
+```
+
+* 排序
+
+```python
+#order_by()
+#用法：MyModel.objects.order_by('列1'，’-列2‘，...)
+#默认是asc, 如果是降序，需在字段前加上'-'表示
+
+a4 = Book.objects.order_by('-price')
+#组合
+Book.objects.values('title').order_by('-price')
+
+a4.query #打印SQL语句
+```
+
+* filter
+
+  ```python
+  #MyModel.objects.filter(属性1=值1, 属性2=值2...)
+  select * from tb where f1=v1 and f2=v2;
+  #返回值：QuerySet 容器对象，内部存放的是MyModel实例
+  books = Book.objects.filter(pub='beijing')
+  
+  ```
+
+* exclude(条件)
+
+  ```python
+  MyModel.objects.exclude(条件)
+  #返回不包含此条件的全部的数据集
+  select *from tb where k1!=v1 and k2!=v2;
+  ```
+
+* get(条件)
+
+  ```python
+  MyModel.objects.get(条件)
+  #返回满足条件的唯一一条数据，该方法只能返回一条数据，如果查询结果多余一条数据则抛出Model。MultipleObjectsReturned异常，如果查询结果没有数据也是报错Model。DoesNotExist异常
+  
+  ```
+
+* 查询谓词，每一个查询谓词，是一个车独立的查询功能
+
+  ```python
+  #__exact 等值匹配
+  Book.objects.filter(id__exact=1) #where id =1
+  
+  #__contains
+  filter(name__contains='xx') #where name like '%xx%'
+  
+  #__startswith 以xxx开始
+  
+  #__endswith 以xxx结束
+  
+  #__gt 大于
+  filter(age__gt = 50) #where age > 50
+  #__gte ; >=
+  #__lt ;<
+  #__lte ; <=
+  
+  #__in where country in ('china', 'japan')
+  .fiter(country__in=['china', 'japan'])
+  
+  
+  #__range ;where age between 35 and 40
+  .filter(age__range=35,40)
+  
+  ```
+
+
+
+# update
+
+* 修改单个实体的某些字段值的步骤
+
+  ```python
+  #1.查get
+  
+  #2.modify
+  	#通过obj.field = new_value
+  #3.save
+  	#obj.save()
+      
+      
+  b1 = Book.objects.get(id=1)
+  b1.price = 20
+  b1.save()
+  ```
+
+* 批量数据更新
+
+  直接调用QuerySet的update(属性=值)实现批量修改
+
+  ```python
+  books = Books.objects.filter(id__gt=3)
+  books.update(price=0) #返回更新的条数
+  ```
+
+# del
+
+* 单个数据
+
+  ```python
+  try:
+      auth = Author.objects.get(id=1)
+      auth.delete()
+  except:
+      print("fail")
   ```
 
   
 
+* 批量数据
 
+  ```python
+  #1.查询所以满足条件的数据QuerySet集合
+  #2.delete()
+  auths = Author.objects.filter(age__gt=5)
+  auths.delete()
+  ```
+
+  
 
 
 
