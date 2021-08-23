@@ -409,6 +409,114 @@ a4.query #打印SQL语句
 
   
 
+# F对象
+
+```python
+from django.db.models import F
+
+# 更新Book实例中的所有的零售价+10
+books = Book.objecs.all()
+for book in books:
+    book.mark_price = book.mark_price+10
+    book.save()
+
+#F - 上面的代码存在竞争的问题
+Book.objects.all().update(mark_price=F('mark_pricce') + 10)
+#update book set mark_price = mark_price+10
+
+```
+
+
+
+```python
+#对数据库中的两个对象的值进行比较
+Book.objects.filter(mark_price__gt=F('price'))
+#select * from book where market_price>price
+```
+
+
+
+
+
+# Q对象
+
+在获取查询结果集，使用复杂的逻辑或，逻辑非等操作时使用
+
+ ```python
+ Book.objects.filter(Q(price_lt=20)|Q(pub="bejing"))
+ 
+ Q()|Q()
+ Q()&Q()
+ Q()&~Q()
+ 
+ ```
+
+
+
+# 聚合查询
+
+* 整表聚合
+
+  ```python
+  #聚合方法Sum, Avg, Count, Max, Min
+  # select count(*) as cnt from book;
+  #语法
+  MyModel.objects.aggregate(结果变量名=聚合函数('列'))
+  
+  #返回：结果变量名和值组成的 字典，格式为：{"结果变量名":"值"}
+  
+  #example
+  Book.objects.aggregate(res=Count('id'))
+  #{'res': 4}
+  
+  ```
+
+  
+
+* 分组聚合
+
+  ```python
+  #语法
+  QuerySet.annotate(结果变量名=聚合函数('列'))
+  #返回值：QuerySet
+  
+  #example
+  #1.通过先用查询的结果MyModel.objeccts.values查询要分组聚合的列
+  MyModel.objects.values('列1', '列2')
+  
+  pub_set = Book.objects.values('pub')
+  pub_set.annotate(列=聚合函数('列'))
+  pub_set.annotate(mycount=Count('pub')) #每个出版社多少个数据
+  
+  #根据聚合结果having
+  pub_set.annotate(mycount=Count('pub')).filter(mycount_gt=1) #having mycount>1
+  ```
+
+  
+
+# 原生SQL
+
+```python
+#1. MyModel.objects.raw(sql_str, 拼接参数)
+#返回值： RawQuerySet 集合对象，这个结果就只支持循环
+books = models.Book.objects.raw('select * from book;')
+for book in books:
+    print(book)
+
+books = models.Book.objects.raw('select * from book wher id=%s', ['xxxx'])
+# 这里会有SQL注入的问题
+
+
+#cursor
+from django.db import connection
+with connection.cursor() as cur:
+    cur.execute("sql", '拼接参数')
+```
+
+
+
+
+
 
 
 
