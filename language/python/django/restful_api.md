@@ -56,3 +56,29 @@ class IndexView(APIView):
 
 
 
+```shell
+这个 sqlmigrate 命令并没有真正在你的数据库中的执行迁移 - 它只是把命令输出到屏幕上，让你看看 Django 认为需要执行哪些 SQL 语句。这在你想看看 Django 到底准备做什么，或者当你是数据库管理员，需要写脚本来批量处理数据库时会很有用。
+如果你感兴趣，你也可以试试运行 python manage.py check ;这个命令帮助你检查项目中的问题，并且在检查过程中不会对数据库进行任何操作。
+
+
+让我们看看迁移命令会执行哪些 SQL 语句。sqlmigrate 命令接收一个迁移的名称，然后返回对应的 SQL：
+
+$ python manage.py sqlmigrate polls 0001
+```
+
+
+
+
+
+# 序列化
+
+```
+ManyToManyField
+
+https://blog.csdn.net/hpu_yly_bj/article/details/78941104
+```
+
+
+
+manytomany时，需要展示的数据是多行
+
