@@ -105,6 +105,8 @@ sudo pacman -Syyu  #整个更新
 
 # win manger -- i3
 
+shorcut : https://i3wm.org/docs/refcard.html
+
 ```shell
 sudo pacman -S i3-wm
 ```
