@@ -84,6 +84,37 @@ git stash pop-----------将你stash到本地的代码与重新git pull下的代�
 git add XXX-------------将XXX文件加入到暂存区
 git commit -m "注释"----将暂存区的文件提交到本地仓库
 git push----------------将本地仓库的内容推送到远程仓库
+
+前提：必须是处于git下的文件，未add到git的文件无法使用。
+
+命令：git stash
+
+保存当前工作进度，将工作区和暂存区恢复到修改之前。
+
+命令：git stash save message
+
+作用同上，message为此次进度保存的说明。
+
+命令：git stash list
+
+显示保存的工作进度列表，编号越小代表保存进度的时间越近。
+
+命令：git stash pop stash@{num}
+
+恢复工作进度到工作区，此命令的stash@{num}是可选项，在多个工作进度中可以选择恢复，不带此项则默认恢复最近的一次进度相当于git stash pop stash@{0}
+
+命令：git stash apply stash@{num}
+
+恢复工作进度到工作区且该工作进度可重复恢复，此命令的stash@{num}是可选项，在多个工作进度中可以选择恢复，不带此项则默认恢复最近的一次进度相当于git stash apply stash@{0}
+
+命令：git stash drop stash@{num}
+
+删除一条保存的工作进度，此命令的stash@{num}是可选项，在多个工作进度中可以选择删除，不带此项则默认删除最近的一次进度相当于git stash drop stash@{0}
+
+命令：git stash clear
+
+删除所有保存的工作进度。
+
 ```
 
 > 之所以会有这样的效果是因为我在git pull代码之前就从来没有进行过一次git commit.
