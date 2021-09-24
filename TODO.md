@@ -155,3 +155,10 @@ Django orm框架
 complier
 https://github.com/kiven-li/xscript
 
+
+
+世界上能做一个链接器的人坐不满一屋！做个编译器和链接器应该看的书籍
+
+https://blog.csdn.net/simanstar/article/details/12944817#comments
+
+
