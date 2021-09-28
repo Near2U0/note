@@ -161,4 +161,9 @@ https://github.com/kiven-li/xscript
 
 https://blog.csdn.net/simanstar/article/details/12944817#comments
 
+恶意代码分析实战
+
+https://blog.csdn.net/qq_43481350/category_10338853.html
+https://github.com/Hadreysl/-/tree/master/Practical%20Malware%20Analysis%20Labs
+
 
