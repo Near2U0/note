@@ -13,7 +13,7 @@ docker-compose是一个单机的编排工具
 
 
 #如果容器映射不生效，那么可以尝试如下的重启方式
-docker-compose up -d
+docker-compose up -d		#-d 后台运行
 
 
   pull               Pull service images
@@ -26,7 +26,7 @@ docker-compose up -d
   stop               Stop services
   top                Display the running processes
   unpause            Unpause services
-  up                 Create and start containers
+  up                 Create and start containers (重新创建容器，有时候修改不生效的时候用)
   version            Show the Docker-Compose version information
 
 
