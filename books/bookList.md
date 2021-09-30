@@ -155,6 +155,7 @@
 - [x] [程序员的自我修养--链接、装载与库](https://book.douban.com/subject/3652388/)
 
 - [ ] [链接器和加载器](https://book.douban.com/subject/4083265/)
+- [x] [游戏脚本高级编程](https://book.douban.com/subject/1927405/)
 
 * [x] [Linux内核源码剖析:TCP/IP实现](https://book.douban.com/subject/5914256/)
 * [ ] [图解HTTP](https://book.douban.com/subject/25863515/)
@@ -163,7 +164,7 @@
 
 * [x] [C程序设计语言(第2版·新版)-The_C_Programming_Language](https://book.douban.com/subject/1139336/)
 
-* [ ] [C和指针](https://book.douban.com/subject/3012360/)
+* [ ] [C和指针](https://book.douban./subject/3012360/)
 
 * [ ] [C Primer Plus（第6版）中文版](https://book.douban.com/subject/26792521/)
 
