@@ -154,11 +154,14 @@
 
 - [x] [程序员的自我修养--链接、装载与库](https://book.douban.com/subject/3652388/)
 
-- [ ] [链接器和加载器](https://book.douban.com/subject/4083265/)
-- [x] [游戏脚本高级编程](https://book.douban.com/subject/1927405/)
 
 * [x] [Linux内核源码剖析:TCP/IP实现](https://book.douban.com/subject/5914256/)
 * [ ] [图解HTTP](https://book.douban.com/subject/25863515/)
+
+### 编译原理
+
+- [ ] [链接器和加载器](https://book.douban.com/subject/4083265/)
+- [x] [游戏脚本高级编程](https://book.douban.com/subject/1927405/)
 
 ### C语言
 
