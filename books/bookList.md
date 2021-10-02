@@ -181,7 +181,9 @@
 
 * [x] [30天自制操作系统](https://book.douban.com/subject/11530329/)
 
+### 体系结构
 
+* [ ] [深入理解计算机系统（原书第2版）](https://book.douban.com/subject/5333562/)
 
 ## 文学
 
