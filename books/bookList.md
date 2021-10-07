@@ -158,6 +158,15 @@
 * [x] [Linux内核源码剖析:TCP/IP实现](https://book.douban.com/subject/5914256/)
 * [ ] [图解HTTP](https://book.douban.com/subject/25863515/)
 
+
+### Windows-kernel
+
+
+* [ ] [Windows内核情景分析](https://book.douban.com/subject/3715700/)
+
+百度云：https://bbs.pediy.com/thread-254085.htm
+
+
 ### 编译原理
 
 - [ ] [链接器和加载器](https://book.douban.com/subject/4083265/)
