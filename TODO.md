@@ -167,3 +167,14 @@ https://blog.csdn.net/qq_43481350/category_10338853.html
 https://github.com/Hadreysl/-/tree/master/Practical%20Malware%20Analysis%20Labs
 
 
+看雪forum
+RE-入门：https://bbs.pediy.com/search-OllyDBG_20_E5_85_A5_E9_97_A8_E7_B3_BB_E5_88_97.htm
+
+https://bbs.pediy.com/thread-52376.htm
+
+OD
+https://blog.csdn.net/wxh0000mm/category_10524438.html
+
+https://bbs.pediy.com/search-OllyDBG_20_E5_85_A5_E9_97_A8_E7_B3_BB_E5_88_97.htm
+
+
