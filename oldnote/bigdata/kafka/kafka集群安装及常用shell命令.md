@@ -55,29 +55,53 @@ kafka-server-start.sh config/server.properties &
 # 2.Kafka常用操作命令
 
 1. 查看当前服务器中的所有topic
-bin/kafka-topics.sh --list --zookeeper  zk01:2181
+  bin/kafka-topics.sh --list --zookeeper  zk01:2181
+
 2. 创建topic
-./kafka-topics.sh --create --zookeeper zk01:2181 --replication-factor 1 --partitions 3 --topic first
+  ./kafka-topics.sh --create --zookeeper zk01:2181 --replication-factor 1 --partitions 3 --topic first
+
 3. 删除topic
-sh bin/kafka-topics.sh --delete --zookeeper zk01:2181 --topic test
-需要server.properties中设置delete.topic.enable=true否则只是标记删除或者直接重启。
+  sh bin/kafka-topics.sh --delete --zookeeper zk01:2181 --topic test
+  需要server.properties中设置delete.topic.enable=true否则只是标记删除或者直接重启。
+
 4. 通过shell命令发送消息
-kafka-console-producer.sh --broker-list kafka01:9092 --topic itheima
+  kafka-console-producer.sh --broker-list kafka01:9092 --topic itheima
+
 5. 通过shell消费消息
-sh bin/kafka-console-consumer.sh --zookeeper zk01:2181 --from-beginning --topic test1
-写--from-beginning会显示历史消息，如果只想显示最新的可以不写
+  sh bin/kafka-console-consumer.sh --zookeeper zk01:2181 --from-beginning --topic test1
+  写--from-beginning会显示历史消息，如果只想显示最新的可以不写
+
+  ```shell
+  #如果需要用户名、密码认证，需要如下的配置
+  
+  # vim consumer.properties
+  bootstrap.servers=localhost:9092
+  group.id=test-consumer-group
+  security.protocol=SASL_PLAINTEXT
+  sasl.mechanism=PLAIN
+  sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule required username="total" password="rq$#123dfqw&!";
+  
+  
+  #console consume
+   bin/kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic dbaudit_new  --consumer.config config/consumer.properties
+  ```
+
+  
+
 6. 查看消费位置
-sh kafka-run-class.sh kafka.tools.ConsumerOffsetChecker --zookeeper zk01:2181 --group testGroup
+  sh kafka-run-class.sh kafka.tools.ConsumerOffsetChecker --zookeeper zk01:2181 --group testGroup
+
 7. 查看某个Topic的详情
-sh kafka-topics.sh --topic test --describe --zookeeper zk01:2181
+  sh kafka-topics.sh --topic test --describe --zookeeper zk01:2181
+
 8. 停止服务
-./kafka-server-stop.sh
-9.添加分区
-bin/kafka-topics.sh --alter --zookeeper localhost:2181 --topic test_topic --partitions 3
-sh bin./kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic kafkatest
-10.查看topic的偏移
-sh kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list localhost:9092 -topic kafkatest2 --time -1
-sh kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list localhost:9092 -topic kafkatest2 --time -2
+  ./kafka-server-stop.sh
+  9.添加分区
+  bin/kafka-topics.sh --alter --zookeeper localhost:2181 --topic test_topic --partitions 3
+  sh bin./kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic kafkatest
+  10.查看topic的偏移
+  sh kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list localhost:9092 -topic kafkatest2 --time -1
+  sh kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list localhost:9092 -topic kafkatest2 --time -2
 
 
 用ConsumerGroupCommand工具，我们可以使用list，describe，或delete消费者组（注意，删除只有在分组元数据存储在zookeeper的才可用）。当使用新消费者API（broker协调处理分区和重新平衡），当该组的最后一个提交的偏移到期时，该组被删除。 例如，要列出所有主题中的所有用户组：
