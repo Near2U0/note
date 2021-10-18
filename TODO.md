@@ -178,3 +178,11 @@ https://blog.csdn.net/wxh0000mm/category_10524438.html
 https://bbs.pediy.com/search-OllyDBG_20_E5_85_A5_E9_97_A8_E7_B3_BB_E5_88_97.htm
 
 
+
+# python
+
+1. 线程、进程
+
+
+
+
