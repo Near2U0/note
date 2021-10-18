@@ -183,6 +183,6 @@ https://bbs.pediy.com/search-OllyDBG_20_E5_85_A5_E9_97_A8_E7_B3_BB_E5_88_97.htm
 
 1. 线程、进程
 
-
+2. Django事务
 
 
