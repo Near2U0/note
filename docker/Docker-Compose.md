@@ -32,3 +32,17 @@ docker-compose up -d		#-d 后台运行
 
 ```
 
+构建镜像
+
+```shell
+docker build . -t secevent:v1.0
+```
+
+
+
+docker-compose启动
+
+```shell
+docker-compose up -d 
+```
+

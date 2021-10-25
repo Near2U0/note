@@ -300,3 +300,42 @@ Docker镜像含有启动容器所需要的文件系统及其内容，因此，�
   ```
 
   
+
+
+
+# 快速打包部署
+
+```shell
+
+# 构建镜像
+[root@cz schedulerJobs]# ll
+total 176
+drwxr-xr-x. 3 root root    129 Oct 25 11:31 config
+-rwxr-xr-x. 1 root root    738 Oct 25 16:57 config.ini
+-rwxr-xr-x. 1 root root 147456 Sep 22 16:37 db.sqlite3
+drwxr-xr-x. 8 root root   4096 Oct 25 17:03 django_q
+-rwxr-xr-x. 1 root root    598 Oct 25 17:01 docker-compose.yml
+-rwxr-xr-x. 1 root root    300 Sep 16 17:33 Dockerfile
+drwxr-xr-x. 2 root root     27 Oct 25 15:43 logs
+-rwxr-xr-x. 1 root root    691 Oct 25 11:28 manage.py
+-rwxr-xr-x. 1 root root    377 Oct 25 15:53 requirements.txt
+drwxr-xr-x. 3 root root    108 Oct 25 16:57 schedulerJobs
+drwxr-xr-x. 4 root root   4096 Oct 25 11:31 schedulerq
+-rwxr-xr-x. 1 root root    236 Oct 25 15:38 start.sh
+drwxr-xr-x. 5 root root     65 Oct 25 11:32 venv
+
+[root@cz schedulerJobs]# docker build . -t schedulerjobs:v1.0
+
+
+# 根据容器制作镜像
+
+docker save -o schedulerjobs_image.tar  schedulerjobs:v1.0 
+
+
+
+# 加载镜像
+docker load -i schedulerjobs_image.tar
+
+
+```
+
