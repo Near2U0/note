@@ -9,7 +9,7 @@
 
 
 ```json
-cat /tmp/identity.2.log|clickhouse-client --query="INSERT INTO tutorial.identity   FORMAT  JSONEachRow" --input_format_skip_unknown_fields=1 --max_insert_block_size=100000  --password
+cat /tmp/identity.2.log|clickhouse-client --query="INSERT INTO tutorial.identity   FORMAT  JSONEachRow" --input_format_skip_unknown_fields=1 --input_format_allow_errors_num=100  --max_insert_block_size=100000  --password
 
 
 
@@ -28,6 +28,10 @@ TSKV
 
 0-禁用。
 1-启用。
+
+
+
+--input_format_allow_errors_num= 这样的参数，可以通过：clickhouse-client --help |grep xx 来查看帮助
 
 ```
 
