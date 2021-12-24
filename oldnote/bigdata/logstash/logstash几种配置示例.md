@@ -81,3 +81,63 @@ output {
 ```
 
 
+
+# 采集kafka数据，auth
+
+```yaml
+    input {
+      kafka {
+        sasl_jaas_config => "org.apache.kafka.common.security.plain.PlainLoginModule required username='auser'  password='apassword';"
+      }
+    }
+
+
+input {
+  kafka{
+    bootstrap_servers => ["xxxxxm:9092"]
+    client_id => "secenter_x"
+    group_id => "secentter_x0"
+    # latest earliest
+    auto_offset_reset => "latest"
+    consumer_threads => 2
+    decorate_events => true
+    security_protocol => "SASL_PLAINTEXT"
+    sasl_mechanism => "PLAIN"
+    jaas_path => "/data/logstash-6.7.0/auth/cons.conf"
+    topics => ["xxxx"]
+    type => "secdev_xxxx"
+  }
+}
+  
+  
+  
+  +++++ cons.conf ++++
+  KafkaClient {
+    org.apache.kafka.common.security.plain.PlainLoginModule required
+    username="cons"
+    password="Digitalgd@cons123";
+
+};
+  +++++ cons.conf ++++
+  
+output {
+  #stdout { codec => rubydebug }
+
+    file { path => "output/moni/moni-%{date}.log"}
+
+    kafka {
+      bootstrap_servers => "192.168.190.103:9092"
+      topic_id => "moni_new"
+      codec => json
+    }
+
+    elasticsearch{
+     user => 'elastic'
+     password => 'xxx'
+     index => "logstash-moni-%{date}"
+     hosts => ["http://192.168.190.105:9200"]
+    }
+
+}
+```
+
