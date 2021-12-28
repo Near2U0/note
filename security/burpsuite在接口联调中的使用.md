@@ -2,7 +2,7 @@
 
 # PC设置代理
 
-![image-20211224124505323](..\images\security\burp\image-20211224124505323.png)
+![](../images/security/burp/image-20211224124505323.png)
 
 
 
@@ -30,7 +30,7 @@
 
 http-history中可以看到所有的拦截的http请求
 
-![image-20211224125314345](..\images\security\burp\image-20211224125314345.png)
+![](..\images\security\burp\image-20211224125314345.png)
 
 
 
