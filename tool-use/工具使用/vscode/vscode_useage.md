@@ -1,3 +1,4 @@
+[toc]
 
 # vim-plugin
 
@@ -18,3 +19,24 @@ Now the folds should no longer automatically expand when you scroll past them wi
 Be aware that this is a hack because of various problems with VS Code itself that make fixing this difficult.
 
 ```
+
+
+
+
+
+# shortcut
+
+```shell
+# format code
+alt+shift+F
+
+
+```
+
+
+
+
+
+# VS Code不能跳转到定义
+
+友们推荐了一个vue-helper的插件。
