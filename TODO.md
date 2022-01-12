@@ -195,4 +195,5 @@ write a article every week
 
 
 python restful api 的代码现在的书写方式还是比较麻烦，需要再梳理一下怎么写模板代码
+特别是序列化和反序列化的问题
 
