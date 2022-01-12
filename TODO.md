@@ -193,3 +193,6 @@ https://bbs.pediy.com/search-OllyDBG_20_E5_85_A5_E9_97_A8_E7_B3_BB_E5_88_97.htm
 
 write a article every week
 
+
+python restful api 的代码现在的书写方式还是比较麻烦，需要再梳理一下怎么写模板代码
+
