@@ -221,3 +221,13 @@ vue中slot-scope插槽的使用方法，最新版本的vue3.0(#default)插槽写
 
 ```
 
+# http
+
+
+了解一下http的协议，极客时间
+
+# go
+
+testing 包的使用
+
+
