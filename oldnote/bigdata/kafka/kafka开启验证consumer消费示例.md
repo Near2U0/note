@@ -32,3 +32,18 @@ sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule require
 
 > 注意上面的`sasl.jaas.config`后面要加分号。
 
+
+
+
+
+```shell
+# producer
+
+[root@kafka2 kafka_2.12-1.1.1]# ./bin/kafka-console-producer.sh --broker-list  127.0.0.1:9092 --topic test --producer.config config/consumer.properties                
+[2022-02-09 15:20:15,614] WARN The configuration 'group.id' was supplied but isn't a known config. (org.apache.kafka.clients.producer.ProducerConfig)
+>test from digital guangdong
+>^C
+
+
+```
+
