@@ -230,4 +230,9 @@ vue中slot-scope插槽的使用方法，最新版本的vue3.0(#default)插槽写
 
 testing 包的使用
 
+# frontend
+
+深度剖析：如何实现一个 Virtual DOM 算法
+https://github.com/livoras/blog/issues/13
+
 
