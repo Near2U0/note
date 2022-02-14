@@ -1,0 +1,42 @@
+
+
+
+filebeat.inputs:
+
+- type: log
+
+  # Change to true to enable this input configuration.
+  enabled: true
+
+  # Paths that should be crawled and fetched. Glob based paths.
+  paths:
+    #- /var/log/*.log
+    # 1.这里配置需要收集的数据目录，支持通配符
+    - e:\tmp\message.log
+    #- c:\programdata\elasticsearch\logs\*
+
+#output.console:
+#  pretty: true
+
+
+#output.file:
+#  path: "e:\tmp\"
+#  filename: filebeat_out
+
+#2.配置日志中台的接收地址
+##日志中台主机：10.129.8.187, 10.129.8.188, 10.129.8.189
+#端口：515-520 tcp, udp
+
+output.tcp:
+  host: 10.101.104.109
+  port: 60000
+
+
+processors:
+  - add_host_metadata: ~
+  - add_cloud_metadata: ~
+
+processors:
+- drop_fields:
+    fields: ["beat","host","input","prospector"]
+
