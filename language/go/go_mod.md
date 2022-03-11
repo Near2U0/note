@@ -78,6 +78,20 @@ require (
 
 如果下载所有依赖可以使用`go mod download`命令。
 
+```shell
+#下载所有的依赖
+go mod download
+
+#下载指定的包
+go get github.com/agext/uuid
+```
+
+>通用的包 一般去github上搜索
+>
+>https://github.com/avelino/awesome-go
+
+
+
 ## 整理依赖
 
 我们在代码中删除依赖代码后，相关的依赖库并不会在`go.mod`文件中自动移除。这种情况下我们可以使用`go mod tidy`命令更新`go.mod`中的依赖关系。
